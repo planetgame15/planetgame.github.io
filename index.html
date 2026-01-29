@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <meta name="google-site-verification" content="PJMe5zlK6EEk-X9qFQk0cV1FbuHXirmYzY-mXCTkA8s" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -459,7 +460,8 @@
         <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
             <span class="bg-purple-600 w-2 h-8 rounded-full"></span> PILIH GAME
         </h2>
-        
+    
+
        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-5">
              <div onclick="pilihGame('mlbb')"class="cursor-pointer group">
                 <img src="https://i.ibb.co.com/CKKGWSnG/Whats-App-Image-2026-01-22-at-14-56-44-Copy.jpg" class="w-full aspect-square object-cover rounded-xl mb-2">
@@ -471,10 +473,11 @@
                 <p class="text-center font-bold glass p-2 mt-2 rounded-Xl text-[10px] leading-tight h-10 flex items-center justify-center">Free Fire</p>
             </div>
             
-             <div onclick="pilihGame('FFMAX')"class="cursor-pointer group">
+             
+ <div onclick="pilihGame('ffmax')"class="cursor-pointer group">
                 <img src="https://i.ibb.co.com/j9GgPLg7/Whats-App-Image-2026-01-22-at-14-56-43-1.jpg"class="w-full aspect-square object-cover rounded-xl mb-2">
-            <p class="text-center font-bold glass p-2 mt-2 rounded-Xl text-[10px] leading-tight h-10 flex items-center justify-center">Free Fire Max</p>
-                </div>
+                <p class="text-center font-bold glass p-2 mt-2 rounded-Xl text-[10px] leading-tight h-10 flex items-center justify-center">Free Fire Max</p>
+            </div>
 
     
             <div onclick="pilihGame('magic')"class="cursor-pointer group">
@@ -486,12 +489,27 @@
              <img src="https://i.ibb.co.com/bRLHd97x/Whats-App-Image-2026-01-22-at-14-56-42.jpg" class="w-full aspect-square object-cover rounded-xl mb-2">
                 <p class="text-center font-bold glass p-2 mt-2 rounded-Xl text-[10px] leading-tight h-10 flex items-center justify-center">EA SPORTS FC™ Mobile</p>
             </div>
+
+
 </div>
 
       </div>
     </div>
-    <div id="main-content" class="hidden space-y-6 max-w-4xl mx-auto">
+    <div id="main-content"class="hidden space-y-6 max-w-4xl mx-auto">
         
+<div class="mt-4 p-4 bg-gray-800 rounded-xl border border-purple-500/30">
+    <label class="text-white text-sm font-bold mb-2 block">Punya Kode Promo?</label>
+    <div class="flex gap-2">
+        <input type="text" id="promoInput" placeholder="Masukkan kode..." 
+               class="flex-1 p-2 rounded-lg bg-white text-black border border-gray-700 outline-none focus:border-purple-500">
+        <button onclick="cekPromo()" 
+                class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition">
+            Cek
+        </button>
+    </div>
+    <p id="promo-status" class="mt-2 text-xs font-bold"></p>
+</div>
+
         <button onclick="tombolKembali()" class="flex items-center gap-2 text-purple-400 hover:text-white transition font-semibold mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -514,19 +532,26 @@
         </button>
     </div>
 
-    <script>
+
+     <script>
         let gameTerpilih = null;
+        let diskon = 0;
         let nominalTerpilih = "";
+        
         let hargaTerpilih = "";
         const nomorWA = "6289521890032"; // GANTI NOMOR WA ANDA DI SINI
+
 
         const dbGame = {
             mlbb: { nama: "Mobile Legends: Bang Bang", placeholder: "User ID", needZone: true, nominal: [{dm:"3 DM", harga:"Rp 1.100"},{dm:"5 DM", harga:"Rp 1.600"},{dm:"19 DM", harga:"Rp 6.223"},{dm:"44 DM", harga:"Rp 12.400"},{dm:"59 DM", harga:"Rp 16.200"},{dm:"85 DM", harga:"Rp 22.850"}, {dm:"170 DM", harga:"Rp 44.700"},{dm:"240 DM", harga:"Rp 62.720"},{dm:"296 DM", harga:"Rp 77.500"} ,{dm:"408 DM", harga:"Rp 105.500"} 
                ,{dm:"875 DM", harga:"Rp 219.500"},{dm:"2010 DM", harga:"Rp 475.700"},] },
-            ffmax : { nama: "Free Fire MAX", placeholder: "Player ID", needZone: false, nominal: [{dm:"5 DM", harga:"Rp 900"}, {dm:"30 DM", harga:"Rp 7.000"} , {dm:"70 DM", harga:"Rp 10.000"}, {dm:"100 DM", harga:"Rp 15.000"}, {dm:"140 DM", harga:"Rp 20.000"}
+
+            ffmax: { nama: "Free Fire Max", placeholder: "Player ID", needZone: false, nominal: [{dm:"5 DM", harga:"Rp 900"}, {dm:"30 DM", harga:"Rp 7.000"} , {dm:"70 DM", harga:"Rp 10.000"}, {dm:"100 DM", harga:"Rp 15.000"}, {dm:"140 DM", harga:"Rp 20.000"}
               , {dm:"200 DM", harga:"Rp 28.500"}, {dm:"300 DM", harga:"Rp 45.000"}, {dm:"355 DM", harga:"Rp 46.000"}, {dm:"475 DM", harga:"Rp 65.000"}, {dm:"500 DM", harga:"Rp 70.000"}, {dm:"600 DM", harga:"Rp 78.912"}, {dm:"770 DM", harga:"Rp 100.500"}
-            , {dm:"1000 DM", harga:"Rp 134.000"}, {dm:"1300 DM", harga:"Rp 174.500"}
-            ] },
+            , {dm:"1000 DM", harga:"Rp 134.000"}, {dm:"1300 DM", harga:"Rp 174.500"}] },
+
+
+
             ff: { nama: "Free Fire", placeholder: "Player ID", needZone: false, nominal: [{dm:"5 DM", harga:"Rp 900"}, {dm:"30 DM", harga:"Rp 7.000"} , {dm:"70 DM", harga:"Rp 10.000"}, {dm:"100 DM", harga:"Rp 15.000"}, {dm:"140 DM", harga:"Rp 20.000"}
               , {dm:"200 DM", harga:"Rp 28.500"}, {dm:"300 DM", harga:"Rp 45.000"}, {dm:"355 DM", harga:"Rp 46.000"}, {dm:"475 DM", harga:"Rp 65.000"}, {dm:"500 DM", harga:"Rp 70.000"}, {dm:"600 DM", harga:"Rp 78.912"}, {dm:"770 DM", harga:"Rp 100.500"}
             , {dm:"1000 DM", harga:"Rp 134.000"}, {dm:"1300 DM", harga:"Rp 174.500"}] },
@@ -538,7 +563,8 @@
             ]},
         };
 
-        function pilihGame(key) {
+
+       function pilihGame(key) {
             gameTerpilih = dbGame[key];
             document.getElementById('katalog-section').classList.add('hidden');
             document.getElementById('main-content').classList.remove('hidden');
@@ -578,22 +604,67 @@
         }
 
         function kirimWA() {
-            const id = document.getElementById('user_id').value;
-            const zone = document.getElementById('zone_id') ? document.getElementById('zone_id').value : '';
-            
-            if (!id || !nominalTerpilih) return alert("Lengkapi data dan pilih nominal!");
+    const id = document.getElementById('user_id').value;
+    const zone = document.getElementById('zone_id') ? document.getElementById('zone_id').value : '';
 
-            const pesan = `Halo Admin, saya mau topup:\n\n` +
-                          `🎮 Game: ${gameTerpilih.nama}\n` +
-                          `🆔 ID: ${id} ${zone ? '('+zone+')' : ''}\n` +
-                          `💎 Nominal: ${nominalTerpilih}\n` +
-                          `💰 Harga: ${hargaTerpilih}`;
-            
-            window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+    if (!id || !nominalTerpilih) return alert("Lengkapi data dan pilih nominal!");
+
+    // Menghitung harga akhir (menghapus "Rp" dan "." dari string hargaTerpilih)
+    let hargaAngka = parseInt(hargaTerpilih.replace(/[^0-9]/g, ''));
+    let totalBayar = hargaAngka - diskon;
+
+    const pesan = `Halo Admin, saya mau topup:\n\n` +
+        `🎮 Game: ${gameTerpilih.nama}\n` +
+        `🆔 ID: ${id} ${zone ? '(' + zone + ')' : ''}\n` +
+        `💎 Nominal: ${nominalTerpilih}\n` +
+        `💰 Harga Asli: ${hargaTerpilih}\n` +
+        `🎟️ Diskon: Rp ${diskon.toLocaleString('id-ID')}\n` +
+        `✅ Total Bayar: Rp ${totalBayar.toLocaleString('id-ID')}`;
+
+    window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+}
+
+
+
+
+
+function cekPromo() {
+    const kode = document.getElementById('promoInput').value.trim().toUpperCase();
+    const pesanPromo = document.getElementById('promo-status');
+    
+    if (!gameTerpilih) return alert("Pilih game terlebih dahulu!");
+
+    // Logika: FF potongan 2rb, ML potongan 3rb
+    if (kode === "PROMO") {
+        if (gameTerpilih.nama.includes("Mobile Legends")) {
+            diskon = 3000;
+            pesanPromo.innerText = "Promo ML Berhasil (Potongan Rp 3.000)";
+        } 
+        else if (gameTerpilih.nama.includes("Free Fire")) {
+            diskon = 2000;
+            pesanPromo.innerText = "Promo FF Berhasil (Potongan Rp 2.000)";
         }
-    </script>
+         else if (gameTerpilih.nama.includes("Magic Chess: Go Go")) {
+            diskon = 1000;
+            pesanPromo.innerText = "Promo Berhasil (Potongan Rp 1.000)";
+        }
+        pesanPromo.style.color = "green";
+    } else {
+        diskon = 0;
+        pesanPromo.innerText = "Kode salah!";
+        pesanPromo.style.color = "red";
+    }
+}
+
+
+
+
+
+     </script>
 </body>
 </html>
+
+
 </html>
     </script>
     <head>
